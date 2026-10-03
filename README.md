@@ -1,2 +1,1 @@
-# onepost-ai
-AI-powered social media publishing platform
+# OnePost AI v1\nFrontend + AI workflow foundation. Real social APIs are intentionally separate for the final phase.\n

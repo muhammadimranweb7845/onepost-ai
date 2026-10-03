@@ -1,79 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OnePost AI</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1020;color:#f5f7ff}
-.app{display:flex;min-height:100vh}.side{width:240px;background:#11182b;border-right:1px solid #26304a;padding:24px 16px}
-.logo{font-size:24px;font-weight:800;margin:0 8px 28px}.logo span{color:#6d5dfc}.nav{display:grid;gap:8px}
-.nav button{background:transparent;border:0;color:#aeb7cf;text-align:left;padding:13px 14px;border-radius:10px;font-size:14px}.nav button.active{background:#202944;color:#fff}
-.main{flex:1;padding:28px;max-width:1200px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.top h1{margin:0;font-size:28px}.badge{background:#18233b;color:#9caaff;border:1px solid #33406a;padding:8px 12px;border-radius:20px;font-size:12px}
-.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:20px}.card{background:#121a2d;border:1px solid #26304a;border-radius:16px;padding:22px;box-shadow:0 10px 30px #0002}.card h2{margin:0 0 8px;font-size:18px}.muted{color:#8e99b5;font-size:13px}
-.drop{margin-top:18px;border:1.5px dashed #455277;border-radius:14px;padding:38px 20px;text-align:center;cursor:pointer;background:#0e1526;display:block}.drop strong{display:block;font-size:17px;margin-bottom:8px}.drop input{display:none}
-.file{margin-top:14px;padding:11px 12px;background:#1b2540;border-radius:10px;color:#cdd5e9;font-size:13px;display:none}
-.platforms{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.platform{display:flex;align-items:center;gap:10px;padding:13px;border:1px solid #2b3654;border-radius:11px;background:#0f1729}.platform input{accent-color:#7164ff}.icon{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#242e4a}
-.fields{display:grid;gap:12px;margin-top:18px}.fields label{font-size:12px;color:#9ca7c1}.fields input,.fields textarea{width:100%;margin-top:6px;background:#0d1425;border:1px solid #2b3654;color:#fff;border-radius:10px;padding:11px 12px;outline:none}.fields textarea{min-height:95px;resize:vertical}
-.actions{display:flex;gap:10px;margin-top:18px}.primary,.secondary{border:0;border-radius:10px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:#6d5dfc;color:#fff}.secondary{background:#222d48;color:#dce2f3}.primary:disabled,.secondary:disabled{opacity:.6;cursor:wait}
-.status{margin-top:16px;padding:12px;border-radius:10px;background:#101a2f;color:#9eacd0;font-size:13px;display:none}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.stat{background:#121a2d;border:1px solid #26304a;border-radius:14px;padding:17px}.stat b{display:block;font-size:22px;margin-top:6px}
-@media(max-width:850px){.side{width:70px;padding:18px 8px}.logo{font-size:0}.logo span{font-size:22px}.nav button{font-size:0;text-align:center}.grid{grid-template-columns:1fr}.main{padding:18px}}
-</style>
-</head>
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OnePost AI</title><link rel="stylesheet" href="/assets/style.css"></head>
 <body>
-<div class="app">
-<aside class="side"><div class="logo">One<span>Post</span> AI</div><div class="nav">
-<button class="active">⌂ &nbsp; Dashboard</button><button>◉ &nbsp; Upload</button><button>◷ &nbsp; Schedule</button><button>▣ &nbsp; Analytics</button><button>⚙ &nbsp; Settings</button>
-</div></aside>
-<main class="main">
-<div class="top"><h1>OnePost AI Dashboard</h1><div class="badge">MVP • Free</div></div>
-<div class="grid">
-<section class="card">
-<h2>Upload your video</h2><div class="muted">One video. Multiple social platforms.</div>
-<label class="drop" for="video"><strong>📤 Click to choose a video</strong><span class="muted">MP4, MOV or WebM</span><input id="video" type="file" accept="video/*"></label>
-<div id="file" class="file"></div>
-<h2 style="margin-top:24px">Publish to</h2>
-<div class="platforms">
-<label class="platform"><input type="checkbox" checked> <span class="icon">▶</span> YouTube</label>
-<label class="platform"><input type="checkbox" checked> <span class="icon">♪</span> TikTok</label>
-<label class="platform"><input type="checkbox" checked> <span class="icon">f</span> Facebook</label>
-<label class="platform"><input type="checkbox" checked> <span class="icon">◎</span> Instagram</label>
-</div>
+<div class="app"><aside><h2>⚡ OnePost AI</h2><p>Creator Studio</p>
+<nav><button data-view="dashboard">Dashboard</button><button data-view="content">Content</button><button data-view="connections">Connections</button><button data-view="settings">Settings</button></nav></aside>
+<main><header><div><h1 id="pageTitle">Dashboard</h1><p>One video. Multiple platforms.</p></div><b class="ready">● System ready</b></header>
+<section id="dashboard" class="view active">
+<div class="hero"><div><small>ONEPOST WORKFLOW</small><h2>Create once. Prepare everywhere.</h2><p>Upload a video, generate AI content, review it, then publish. Real social APIs are added in the final phase.</p></div><button id="newBtn" class="primary">+ New Post</button></div>
+<div class="cols"><div class="card"><h3>1. Upload video</h3><label class="drop"><input id="video" type="file" accept="video/*"><b>↑ Choose a video</b><span>MP4, MOV, WEBM</span></label><video id="preview" controls hidden></video><p id="file"></p></div>
+<div class="card"><h3>2. Platforms</h3><label><input class="plat" value="youtube" type="checkbox" checked> YouTube</label><label><input class="plat" value="tiktok" type="checkbox" checked> TikTok</label><label><input class="plat" value="facebook" type="checkbox" checked> Facebook</label><label><input class="plat" value="instagram" type="checkbox" checked> Instagram</label></div></div>
+<div class="card"><div class="row"><h3>3. AI Content</h3><button id="ai" class="secondary">✦ Generate AI</button></div>
+<label>Title<input id="title" placeholder="Video title"></label><label>Caption<textarea id="caption" rows="5" placeholder="Caption"></textarea></label><label>Hashtags<input id="tags" placeholder="#ai #content #shorts"></label><p id="aiStatus"></p></div>
+<div class="card row"><div><h3>4. Publish Everywhere</h3><p id="summary">Select platforms and a video.</p></div><button id="publish" class="primary">Publish Everywhere</button></div>
 </section>
-<section class="card">
-<h2>🤖 AI Content</h2><div class="muted">Generate platform-ready copy with Gemini.</div>
-<div class="fields">
-<label>Video/topic<input id="topic" placeholder="Example: New AI tool that helps students study"></label>
-<label>Title<input id="title" placeholder="AI generated title"></label>
-<label>Caption<textarea id="caption" placeholder="AI generated social media caption"></textarea></label>
-<label>Hashtags<input id="tags" placeholder="#AI #Technology #OnePostAI"></label>
-</div>
-<div class="actions"><button id="generateBtn" class="secondary" onclick="generate()">✨ Generate AI</button><button class="primary" onclick="publish()">🚀 Publish Everywhere</button></div>
-<div id="status" class="status"></div>
-</section>
-</div>
-<div class="stats"><div class="stat"><span class="muted">Connected accounts</span><b>0</b></div><div class="stat"><span class="muted">Published</span><b>0</b></div><div class="stat"><span class="muted">Scheduled</span><b>0</b></div></div>
-</main></div>
-<script>
-const video=document.getElementById('video'),file=document.getElementById('file'),status=document.getElementById('status'),btn=document.getElementById('generateBtn');
-video.addEventListener('change',()=>{if(video.files[0]){file.style.display='block';file.textContent='Selected: '+video.files[0].name}});
-function show(t){status.style.display='block';status.textContent=t}
-async function generate(){
- const topic=document.getElementById('topic').value.trim();
- if(!topic){show('Please enter a short video topic first.');return}
- btn.disabled=true; show('Generating with Gemini…');
- try{
-  const res=await fetch('/.netlify/functions/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic})});
-  const data=await res.json();
-  if(!res.ok) throw new Error(data.error||'Request failed');
-  document.getElementById('title').value=data.title||'';
-  document.getElementById('caption').value=data.caption||'';
-  document.getElementById('tags').value=data.hashtags||'';
-  show('AI content generated successfully.');
- }catch(e){show('AI error: '+e.message)}
- finally{btn.disabled=false}
-}
-function publish(){show('Publishing is not connected yet. Next we will connect the official platform APIs.')}
-</script>
-</body>
-</html>
+<section id="content" class="view"><div class="card"><h2>Content Workspace</h2><p>Current draft</p><h3 id="pTitle">No title yet</h3><p id="pCaption">No caption yet</p><p id="pTags">No hashtags yet</p></div></section>
+<section id="connections" class="view"><div class="card"><h2>Connections</h2><p>YouTube: <b>Ready for OAuth</b></p><p>TikTok: API phase</p><p>Facebook: API phase</p><p>Instagram: API phase</p></div></section>
+<section id="settings" class="view"><div class="card"><h2>Settings</h2><label>Brand name<input id="brand" placeholder="Your brand"></label><label>Language<select id="lang"><option>English</option><option>Urdu</option><option>Roman Urdu</option></select></label><label>Default privacy<select id="privacy"><option>Private</option><option>Unlisted</option><option>Public</option></select></label><button id="save" class="primary">Save Settings</button><p id="saved"></p></div><div class="card"><b>Security</b><p>API keys and OAuth secrets stay in Netlify Environment Variables, never in frontend JS.</p></div></section>
+<footer>OnePost AI • Phase 1 foundation</footer></main></div><div id="toast"></div><script src="/assets/app.js"></script></body></html>
