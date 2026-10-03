@@ -84,6 +84,7 @@ function sync(){
 });
 
 $("#publish").onclick=async()=>{
+
   if(!$("#video").files[0])
     return toast("Pehle video upload karo.");
 
@@ -98,7 +99,12 @@ $("#publish").onclick=async()=>{
     let r=await fetch("/.netlify/functions/publish",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({platforms})
+      body:JSON.stringify({
+        platforms,
+        title:$("#title").value,
+        caption:$("#caption").value,
+        hashtags:$("#tags").value
+      })
     });
 
     let d=await r.json();
@@ -107,7 +113,6 @@ $("#publish").onclick=async()=>{
 
   }catch(e){
     toast("Publish preparation failed.");
-
   }finally{
     $("#publish").disabled=false;
   }
@@ -136,3 +141,52 @@ $("#lang").value=s.lang||"English";
 $("#privacy").value=s.privacy||"Private";
 
 sync();
+
+/* =========================
+   YOUTUBE CONNECTION
+   ========================= */
+
+const connectionsPage=$("#connections");
+
+if(connectionsPage){
+
+  const youtubeText=connectionsPage.querySelector("p");
+
+  if(youtubeText){
+
+    const youtubeButton=document.createElement("button");
+
+    youtubeButton.id="youtubeConnect";
+    youtubeButton.className="primary";
+    youtubeButton.textContent="Connect YouTube";
+
+    youtubeButton.style.marginTop="12px";
+
+    youtubeText.insertAdjacentElement(
+      "afterend",
+      youtubeButton
+    );
+
+    youtubeButton.onclick=()=>{
+      window.location.href="/.netlify/functions/youtube-auth";
+    };
+
+    const params=new URLSearchParams(window.location.search);
+
+    if(params.get("youtube")==="connected"){
+
+      youtubeButton.textContent="✓ YouTube Connected";
+      youtubeButton.disabled=true;
+
+      youtubeButton.style.opacity="0.8";
+
+      toast("YouTube successfully connected.");
+
+      window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname
+      );
+    }
+  }
+}
